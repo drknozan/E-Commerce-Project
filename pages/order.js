@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import Head from "next/head";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { getSession } from "next-auth/react";
 
 export default function Order() {
     const productsInBasket = useSelector(state => state.basket.productsInBasket);
@@ -164,3 +165,20 @@ export default function Order() {
         </div>
     )
 };
+
+export async function getServerSideProps({ req }) {
+    const session = await getSession({ req });
+
+    if (!session) {
+        return {
+            redirect: {
+                destination: "/login",
+                permanent: false
+            }
+        }
+    }
+
+    return {
+        props: { session }
+    }
+}
