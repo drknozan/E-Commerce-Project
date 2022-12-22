@@ -1,6 +1,6 @@
 import Filters from "../../components/Filters";
 import Product from "../../components/Product";
-import clientPromise from "../../utils/mongodb";
+import clientPromise from "../../lib/mongodb";
 
 export default function Products({ products }) {
 

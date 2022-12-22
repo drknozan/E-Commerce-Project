@@ -1,7 +1,7 @@
 import { BsFillBagCheckFill, BsFillCreditCardFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { addNewProduct, addExistingProduct } from "../../../store/reducers/basketSlice";
-import clientPromise from "../../../utils/mongodb";
+import clientPromise from "../../../lib/mongodb";
 import { useState } from "react";
 
 export default function ProductDetails({ product }) {
