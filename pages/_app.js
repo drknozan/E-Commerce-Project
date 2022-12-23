@@ -6,6 +6,7 @@ import Sidebar from "../components/Sidebar";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { SessionProvider } from "next-auth/react";
+import Footer from '../components/Footer';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -42,6 +43,7 @@ function MyApp({ Component, pageProps }) {
                 :
                 <Component {...pageProps} />
             }
+          <Footer />
         </Provider>
       </SessionProvider>
     </>
