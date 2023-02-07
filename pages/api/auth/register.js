@@ -1,4 +1,4 @@
-import clientPromise from "../../../utils/mongodb";
+import clientPromise from "../../../lib/mongodb";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     }
 
     const client = await clientPromise;
-    const db = client.db("store");
+    const db = client.db("e_commerce");
 
     // Change with findOne
     const emailAlreadyExists = await db

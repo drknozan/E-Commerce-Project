@@ -27,7 +27,7 @@ export default function Products({ products }) {
 export async function getServerSideProps(context) {
     try {
         const client = await clientPromise;
-        const db = client.db("store");
+        const db = client.db("e_commerce");
         
         const { gender, type, color, name } = context.query;
         
@@ -63,7 +63,7 @@ export async function getServerSideProps(context) {
         } 
 
         let products = await db
-            .collection("product")
+            .collection("products")
             .find(queryParameters)
             .limit(12)
             .toArray();

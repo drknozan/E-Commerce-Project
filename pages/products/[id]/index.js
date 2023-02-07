@@ -91,10 +91,10 @@ export async function getServerSideProps(context) {
 
     try {
         const client = await clientPromise;
-        const db = client.db("store");
+        const db = client.db("e_commerce");
     
         let product = await db
-          .collection("product")
+          .collection("products")
           .find({ "productCode": id })
           .limit(1)
           .toArray();
