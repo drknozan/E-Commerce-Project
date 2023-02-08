@@ -1,6 +1,6 @@
 import Filters from "../../components/Filters";
 import Product from "../../components/Product";
-import clientPromise from "../../lib/mongodb";
+import { connectToDatabase } from "../../lib/mongodb";
 
 export default function Products({ products }) {
 
@@ -26,8 +26,7 @@ export default function Products({ products }) {
 
 export async function getServerSideProps(context) {
     try {
-        const client = await clientPromise;
-        const db = client.db("e_commerce");
+        const { database } = await connectToDatabase();
         
         const { gender, type, color, name } = context.query;
         
@@ -62,7 +61,7 @@ export async function getServerSideProps(context) {
             queryParameters.name = {$regex: regex, $options: "i"};
         } 
 
-        let products = await db
+        let products = await database
             .collection("products")
             .find(queryParameters)
             .limit(12)

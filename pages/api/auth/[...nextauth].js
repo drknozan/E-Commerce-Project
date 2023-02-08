@@ -1,13 +1,13 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from 'next-auth/providers/credentials';
-import clientPromise from "../../../lib/mongodb";
+import { connectToDatabase } from "../../../lib/mongodb";
 import bcrypt from "bcryptjs";
 
 export default NextAuth({
     providers: [
         CredentialsProvider({
             name: "Credentials",
-            async authorize(credentials, req) {
+            async authorize(credentials) {
 
                 const { email, password } = credentials;
 
@@ -15,24 +15,23 @@ export default NextAuth({
                     throw new Error("Email or password not provided");
                 }
 
-                const client = await clientPromise;
-                const db = client.db("store");
-                
-                const user = await db
-                    .collection("user")
-                    .find({ "email": email })
-                    .limit(1)
-                    .toArray();
+                try {
+                    const { database } = await connectToDatabase();
 
-                if (!user.length > 0) {
-                    throw new Error("No user found with provided email");
-                }
+                    const user = await database
+                    .collection("users")
+                    .findOne({ "email": email });
 
-                const matched = await bcrypt.compare(password, user[0].password);
-
-                if (matched) {
-                    return { email: email };
-                } else {
+                    if (user) {
+                        const matched = await bcrypt.compare(password, user.password);
+                    
+                        if (matched) {
+                            return { email: email };
+                        } else {
+                            return null;
+                        }   
+                    }
+                } catch (err) {
                     return null;
                 }
             }

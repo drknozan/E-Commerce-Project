@@ -1,7 +1,7 @@
 import { BsFillBagCheckFill, BsFillCreditCardFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { addNewProduct, addExistingProduct } from "../../../store/reducers/basketSlice";
-import clientPromise from "../../../lib/mongodb";
+import { connectToDatabase } from "../../../lib/mongodb";
 import { useState } from "react";
 
 export default function ProductDetails({ product }) {
@@ -90,10 +90,9 @@ export async function getServerSideProps(context) {
     const { id } = context.query;
 
     try {
-        const client = await clientPromise;
-        const db = client.db("e_commerce");
+        const { database } = await connectToDatabase();
     
-        let product = await db
+        let product = await database
           .collection("products")
           .find({ "productCode": id })
           .limit(1)
