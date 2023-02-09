@@ -5,7 +5,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react"
 
 export default function Login() {
-    const [alert, setAlert] = useState("");
+    const [alert, setAlert] = useState(null);
     const router = useRouter();
 
     const validationSchema = Yup.object().shape({
@@ -35,10 +35,16 @@ export default function Login() {
                             });
                 
                             if (res.ok) {
-                                setAlert("Logged in");
-                                router.push("/");
+                                setAlert({ msg: "Logged in", type: "success" });
+                                setTimeout(() => {
+                                    setAlert(null);
+                                    router.push("/");
+                                }, 2000);
                             } else {
-                                setAlert("Email or password is wrong");
+                                setAlert({ msg: "Invalid email or password", type: "danger" });
+                                setTimeout(() => {
+                                    setAlert(null);
+                                }, 2000);
                             }
                         }}
                     >
@@ -55,7 +61,7 @@ export default function Login() {
                                 { errors.email && touched.email ? <div className="p-1 mt-1 text-sm text-red-700 bg-red-100 rounded">{errors.email}</div> : null }
                                 <input id="password" name="password" type="password" onChange={handleChange} onBlur={handleBlur} className="block p-2 w-1/2 mt-8 bg-white border border-gray-400 rounded" placeholder="Password"></input>
                                 { errors.password && touched.password ? <div className="p-1 mt-1 text-sm text-red-700 bg-red-100 rounded">{errors.password}</div> : null }
-                                { alert && <div className="p-1 mt-1 text-sm text-red-700 bg-red-100 rounded w-1/2">{alert}</div> }
+                                { alert && <div className={`p-1 mt-1 text-sm ${ alert.type === "danger" ? "bg-red-100 text-red-700" : "bg-green-100 text-green-700" } rounded w-1/2`}>{alert.msg}</div> }
                                 <button type="submit" className="flex border mt-8 rounded px-8 py-2 text-sm mx-auto border-indigo-500 text-indigo-500" disabled={isSubmitting}>Login</button>
                             </form>
                         )}
