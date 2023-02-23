@@ -32,7 +32,7 @@ export default function ProductDetails({ product }) {
         <div className="h-screen">
             <div className="flex container mx-auto">
                 <div className="relative h-[calc(100vh*8/10)] w-[calc(100vw*1/3)] m-4">
-                    <Image className="object-cover rounded" fill src={product.imageUrl} />
+                    <Image className="object-cover rounded" fill src={product.imageUrl} alt="product" />
                 </div>
                 <div className="text-center mx-auto mt-10">
                     <div className="text-3xl text-gray-700">

@@ -33,7 +33,7 @@ const Navbar = () => {
                 <div className="container flex gap-10">
                     <Link href="/">
                         <div className="cursor-pointer flex items-center mr-10">
-                            <Image src={logo} className="h-7" />
+                            <Image src={logo} className="h-7" alt="logo" />
                         </div>
                     </Link>
                     <div className="relative inline-block group">

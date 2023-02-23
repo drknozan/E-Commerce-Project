@@ -11,7 +11,7 @@ const Product = ({ name, imageUrl, price, productCode }) => {
     return (
         <div className="m-5 items-center mx-auto cursor-pointer" onClick={handleClick}>
             <div className="relative w-72 h-96">
-                <Image className="object-cover rounded" fill src={imageUrl} />
+                <Image className="object-cover rounded" fill src={imageUrl} alt="product" />
             </div>
             <div className="text-gray-600" href="#">
                 {name}
