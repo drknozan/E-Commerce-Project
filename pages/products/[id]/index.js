@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addNewProduct, addExistingProduct } from "../../../store/reducers/basketSlice";
 import { connectToDatabase } from "../../../lib/mongodb";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function ProductDetails({ product }) {
     const [size, setSize] = useState("S");
@@ -30,8 +31,8 @@ export default function ProductDetails({ product }) {
     return (
         <div className="h-screen">
             <div className="flex container mx-auto">
-                <div className="">
-                    <img className="h-[calc(100vh*8/10)] w-[calc(100vw*1/3)] object-cover rounded m-4" src={product.imageUrl} />
+                <div className="relative h-[calc(100vh*8/10)] w-[calc(100vw*1/3)] m-4">
+                    <Image className="object-cover rounded" fill src={product.imageUrl} />
                 </div>
                 <div className="text-center mx-auto mt-10">
                     <div className="text-3xl text-gray-700">

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useRouter } from "next/router";
 
 const Product = ({ name, imageUrl, price, productCode }) => {
@@ -9,8 +10,8 @@ const Product = ({ name, imageUrl, price, productCode }) => {
 
     return (
         <div className="m-5 items-center mx-auto cursor-pointer" onClick={handleClick}>
-            <div>
-                <img className="w-72 h-96 object-cover rounded" src={imageUrl} />
+            <div className="relative w-72 h-96">
+                <Image className="object-cover rounded" fill src={imageUrl} />
             </div>
             <div className="text-gray-600" href="#">
                 {name}
