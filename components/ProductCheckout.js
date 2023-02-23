@@ -2,7 +2,7 @@ import { BiTrash } from "react-icons/bi";
 import { deleteProduct } from "../store/reducers/basketSlice";
 import { useDispatch } from "react-redux";
 
-const ProductCheckout = ({ name, imageUrl, size, price, count, index }) => {
+const ProductCheckout = ({ name, imageUrl, size, price, count, index, productCode }) => {
     const dispatch = useDispatch();
 
     return (
@@ -13,7 +13,7 @@ const ProductCheckout = ({ name, imageUrl, size, price, count, index }) => {
                     {name}
                 </div>
                 <div className="text-xs text-gray-500 m-2">
-                    Product Code: { Math.round(Math.random() * 1000000) }
+                    Product Code: {productCode}
                 </div>
                 <div className="text-sm text-gray-600 m-2">
                     Size: {size}

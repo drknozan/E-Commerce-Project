@@ -18,13 +18,13 @@ export default function ProductDetails({ product }) {
     const handleFormSubmit = (e) => {
         e.preventDefault();
         let productCount = 1;
-        if (productsInBasket.find((e) => e.name === product.name && e.size === size)) {
-            let selectedProduct = productsInBasket.find((e) => e.name === product.name);
+        if (productsInBasket.find((e) => e.productCode === product.productCode && e.size === size)) {
+            let selectedProduct = productsInBasket.find((e) => e.productCode === product.productCode);
             productCount = selectedProduct.count;
             productCount++;
-            dispatch(addExistingProduct({ name: product.name, imageUrl: product.imageUrl, size: size, price: product.price, count: productCount,index: productsInBasket.length }));
+            dispatch(addExistingProduct({ name: product.name, imageUrl: product.imageUrl, size: size, price: product.price, productCode: product.productCode, count: productCount,index: productsInBasket.length }));
         } else {
-            dispatch(addNewProduct({ name: product.name, imageUrl: product.imageUrl, size: size, price: product.price, count: productCount,index: productsInBasket.length }));
+            dispatch(addNewProduct({ name: product.name, imageUrl: product.imageUrl, size: size, price: product.price, productCode: product.productCode, count: productCount,index: productsInBasket.length }));
         }
     }
 

@@ -21,7 +21,7 @@ const Sidebar = () => {
                 </div>
                 <div className="overflow-y-scroll overflow-x-hidden mt-12">
                     {productsInBasket && productsInBasket.map((product) => {
-                        return <ProductCheckout name={product.name} imageUrl={product.imageUrl} size={product.size} count={product.count} index={product.index} key={product.index} />
+                        return <ProductCheckout name={product.name} imageUrl={product.imageUrl} size={product.size} count={product.count} index={product.index} key={product.index} productCode={product.productCode} />
                     })}
                 </div>
                 <div onClick={() => router.push("/order")}>
