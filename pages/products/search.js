@@ -6,7 +6,7 @@ export default function Products({ products }) {
 
     return (
         <div>
-            <div className="container mx-auto">
+            <div className="container mx-auto min-h-screen">
                 <div className="flex">
                     <div className="w-1/4">
                         <Filters />

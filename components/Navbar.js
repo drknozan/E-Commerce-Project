@@ -15,6 +15,9 @@ const Navbar = () => {
     
     const productsInBasket = useSelector(state => state.basket.productsInBasket);
 
+    let totalProductCount = 0;
+    productsInBasket.forEach((product) => { totalProductCount += product.count });
+
     const handleChange = (e) => {
         e.preventDefault();
         setSearchInput(e.target.value);
@@ -89,7 +92,7 @@ const Navbar = () => {
                 </form>
                 <BiUser size={30} className="text-gray-500 cursor-pointer mr-5" onClick={() => router.push("/settings")} />
                 <BiShoppingBag size={30} className="text-gray-500 cursor-pointer" onClick={() => dispatch(open())}/>
-                <div className="flex items-center justify-center bg-indigo-500 w-4 h-4 text-[10px] rounded-full text-gray-100">{productsInBasket.length}</div>
+                <div className="flex items-center justify-center bg-indigo-500 w-4 h-4 text-[10px] rounded-full text-gray-100">{totalProductCount}</div>
         </div>
     )
 };
